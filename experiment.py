@@ -23,5 +23,5 @@ G.add_edge(4, 2, 5)
 G.add_edge(4, 3, 20)
 
 print(final_project_part1.dijkstra(G, 0))
-print(part1.dijkstra(G, 0, 1))
-print(part1.dijkstra(G, 0, 2))
+print(part1.dijkstra_approx(G, 0, 1))
+print(part1.dijkstra_approx(G, 0, 2))
