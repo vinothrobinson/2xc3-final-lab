@@ -85,17 +85,6 @@ def total_dist(dist):
     return total
 
 
-def create_random_complete_graph(n, upper):
-    G = DirectedWeightedGraph()
-    for i in range(n):
-        G.add_node(i)
-    for i in range(n):
-        for j in range(n):
-            if i != j:
-                G.add_edge(i, j, random.randint(1, upper))
-    return G
-
-
 def create_random_complete_graph(n, lower, upper):
     G = DirectedWeightedGraph()
     for i in range(n):
