@@ -96,6 +96,17 @@ def create_random_complete_graph(n, upper):
     return G
 
 
+def create_random_complete_graph_negative(n, lower, upper):
+    G = DirectedWeightedGraph()
+    for i in range(n):
+        G.add_node(i)
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                G.add_edge(i, j, random.randint(lower, upper))
+    return G
+
+
 # Assumes G represents its nodes as integers 0,1,...,(n-1)
 def mystery(G):
     n = G.number_of_nodes()
