@@ -19,7 +19,6 @@ def dijkstra_approx(G, source, k):
     while not Q.is_empty():
         current_element = Q.extract_min()
         current_node = current_element.value
-        # if current_element.key != float("-inf"):
         dist[current_node] = current_element.key
 
         for neighbour in G.adj[current_node]:
@@ -28,9 +27,4 @@ def dijkstra_approx(G, source, k):
                 dist[neighbour] = dist[current_node] + G.w(current_node, neighbour)
                 pred[neighbour] = current_node
                 relaxed[neighbour] += 1
-                # if relaxed[neighbour] >= k:
-                #     # Safely remove neighbour from Q
-                #     Q.decrease_key(neighbour, float("-inf"))
-                #     # finished_node = Q.extract_min().value
-                #     print(f"Node {neighbour} was relaxed {k} times")
     return dist
