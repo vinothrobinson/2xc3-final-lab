@@ -96,7 +96,7 @@ def create_random_complete_graph(n, upper):
     return G
 
 
-def create_random_complete_graph_negative(n, lower, upper):
+def create_random_complete_graph(n, lower, upper):
     G = DirectedWeightedGraph()
     for i in range(n):
         G.add_node(i)
@@ -105,6 +105,37 @@ def create_random_complete_graph_negative(n, lower, upper):
             if i != j:
                 G.add_edge(i, j, random.randint(lower, upper))
     return G
+
+
+def create_random_graph(v, e, lower, upper):
+    if e > 2 * triangle(v - 1):
+        print("Number of edges too large")
+        j = 2 * triangle(v - 1)
+    if e < v:
+        print("Number of edges too small")
+        e = v
+
+    G = DirectedWeightedGraph()
+    for i in range(v):
+        G.add_node(i)
+    for i in range(v - 1):
+        G.add_edge(i, i + 1)
+    G.add_edge(v - 1, 0)
+
+    for _ in range(e - v):
+        node1, node2 = random.randint(0, v - 1), random.randint(0, v - 1)
+        while node1 == node2 or node2 in G.adjacent_nodes(node1):
+            node1, node2 = random.randint(0, v - 1), random.randint(0, v - 1)
+        G.add_edge(node1, node2, random.randint(lower, upper))
+    return G
+
+
+def triangle(n):
+    if n <= 0:
+        return 0
+    if n == 1:
+        return 1
+    return n + triangle(n-1)
 
 
 # Assumes G represents its nodes as integers 0,1,...,(n-1)
