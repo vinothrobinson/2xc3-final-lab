@@ -1,7 +1,10 @@
+import math
+
 import min_heap
 import final_project_part1
 import part1
 import timeit
+import matplotlib.pyplot as plot
 
 def experiment1_data(func, func_approx, node_num, trial_num, lower_bound = 1):
     avg_times = [[] for i in range(4)]
@@ -30,5 +33,16 @@ def experiment1_data(func, func_approx, node_num, trial_num, lower_bound = 1):
     return avg_times
 
 
-Ls = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 25, 100)
-print(Ls)
+def experiment1_graph(data, node_num, name):
+    plot.title("Graph Density vs Run Time of Approximations for Various K-Values (|V|) = " + str(node_num))
+    plot.xlabel("Graph Density")
+    plot.ylabel("Run Time")
+    plot.plot(list(range(node_num, 2 * final_project_part1.triangle(node_num - 1) + 1)), data[0], label=name)
+    for i, k in enumerate([0.25, 0.5, 0.75]):
+        plot.plot(list(range(node_num, 2 * final_project_part1.triangle(node_num - 1) + 1)), data[i], label=f"{name} Approximation (k={math.ceil(k*node_num)}")
+    plot.legend()
+    plot.show()
+
+
+data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 10, 100)
+experiment1_graph(data, 10, "Dijkstra")
