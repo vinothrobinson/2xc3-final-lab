@@ -108,8 +108,8 @@ def create_random_graph(v, e, lower, upper):
     for i in range(v):
         G.add_node(i)
     for i in range(v - 1):
-        G.add_edge(i, i + 1)
-    G.add_edge(v - 1, 0)
+        G.add_edge(i, i + 1, random.randint(lower, upper))
+    G.add_edge(v - 1, 0, random.randint(lower, upper))
 
     for _ in range(e - v):
         node1, node2 = random.randint(0, v - 1), random.randint(0, v - 1)
