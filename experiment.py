@@ -39,7 +39,7 @@ def experiment1_graph(data, node_num, name):
     plot.ylabel("Run Time")
     plot.plot(list(range(node_num, 2 * final_project_part1.triangle(node_num - 1) + 1)), data[0], label=name)
     for i, k in enumerate([0.25, 0.5, 0.75]):
-        plot.plot(list(range(node_num, 2 * final_project_part1.triangle(node_num - 1) + 1)), data[i], label=f"{name} Approximation (k={math.ceil(k*node_num)}")
+        plot.plot(list(range(node_num, 2 * final_project_part1.triangle(node_num - 1) + 1)), data[i+1], label=f"{name} Approximation (k={math.ceil(k*node_num)}")
     plot.legend()
     plot.show()
 
