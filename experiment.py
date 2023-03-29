@@ -6,6 +6,7 @@ import part1
 import timeit
 import matplotlib.pyplot as plot
 
+
 def experiment1_data(func, func_approx, node_num, trial_num, lower_bound = 1, ks = [0.05, 0.1, 0.25, 0.5]):
     avg_times = [[] for i in range(len(ks) + 1)]
 
@@ -44,24 +45,21 @@ def experiment1_graph(data, node_num, name, ks=[0.05, 0.1, 0.25, 0.5]):
     plot.show()
 
 
-# data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 10, 10, ks=[0.1, 0.2, 0.5])
-# experiment1_graph(data, 10, "Dijkstra", ks=[0.1, 0.2, 0.5])
-#
-# data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 20, 10)
-# experiment1_graph(data, 20, "Dijkstra")
-#
-# data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 30, 10)
-# experiment1_graph(data, 30, "Dijkstra")
+data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 10, 10, ks=[0.1, 0.2, 0.5])
+experiment1_graph(data, 10, "Dijkstra", ks=[0.1, 0.2, 0.5])
+
+data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 20, 10)
+experiment1_graph(data, 20, "Dijkstra")
+
+data = experiment1_data(final_project_part1.dijkstra, part1.dijkstra_approx, 30, 10)
+experiment1_graph(data, 30, "Dijkstra")
 
 
-data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 10, 100, ks=[0.8, 0.9, 1])
-experiment1_graph(data, 10, "Bellman-Ford", ks=[0.8, 0.9, 1])
+data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 10, 10, ks=[0.1, 0.2, 0.5])
+experiment1_graph(data, 10, "Bellman-Ford", ks=[0.1, 0.2, 0.5])
 
-data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 10, 100, ks=[0.8, 0.9, 1], lower_bound=-1000)
-experiment1_graph(data, 10, "Bellman-Ford", ks=[0.8, 0.9, 1])
+data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 20, 10)
+experiment1_graph(data, 20, "Bellman-Ford")
 
-# data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 20, 10)
-# experiment1_graph(data, 20, "Bellman-Ford")
-#
-# data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 30, 10)
-# experiment1_graph(data, 30, "Bellman-Ford")
+data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 30, 10)
+experiment1_graph(data, 30, "Bellman-Ford")
