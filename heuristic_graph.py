@@ -23,7 +23,10 @@ class HeuristicGraph:
     def add_edge(self, node1, node2, weight):
         if node2 not in self.adj[node1]:
             self.adj[node1].append(node2)
+        if node1 not in self.adj[node2]:
+            self.adj[node2].append(node1)
         self.weights[(node1, node2)] = weight
+        self.weights[(node2, node1)] = weight
 
     def w(self, node1, node2):
         if self.are_connected(node1, node2):
