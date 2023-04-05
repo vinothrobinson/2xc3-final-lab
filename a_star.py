@@ -19,12 +19,13 @@ def a_star(G, s, d, h):
     while not Q.is_empty():
         current_element = Q.extract_min()
         if current_element.value == d:
-            shortest_path.append(d)
+            #shortest_path.append(d)
             print(marked)
             print(pred)
             print(shortest_path)
+            #pred[d] = current_node
             return (pred, shortest_path)
-        shortest_path.append(current_element.value)
+        #shortest_path.append(current_element.value)
         marked[current_element.value] = True
         current_node = current_element.value
         dist[current_node] = current_element.key - h(current_node)
