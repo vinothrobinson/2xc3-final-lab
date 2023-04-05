@@ -1,6 +1,8 @@
 import math
 
+import a_star
 import final_project_part1
+import heuristic_graph
 import part1
 import timeit
 import matplotlib.pyplot as plot
@@ -65,3 +67,4 @@ def experiment1_graph(data, node_num, name, ks=[0.05, 0.1, 0.25, 0.5]):
 # experiment1_graph(data, 30, "Bellman-Ford")
 
 subway_graph = karl.csv_graph()
+print(heuristic_graph.a_star_heuristic(subway_graph, '2', '4'))
