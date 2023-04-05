@@ -48,7 +48,7 @@ def csv_graph():
                 G.add_node(row['station1'])
             if row['station2'] not in G.adj.keys():
                 G.add_node(row['station2'])
-            G.add_edge(row['station1'], row['station2'], row['time'])
+            G.add_edge(row['station1'], row['station2'], float(row['time']))
 
         G.set_heuristic(heuristic_generator.get_heuristic_all_pairs(G))
 
