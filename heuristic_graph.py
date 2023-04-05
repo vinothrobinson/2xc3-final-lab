@@ -16,7 +16,6 @@ class HeuristicGraph:
 
     def add_node(self, node):
         self.adj[node] = []
-        self.heuristic = self.heuristic_generator.get_heuristic_all_pairs(self)
 
     def add_edge(self, node1, node2, weight):
         if node2 not in self.adj[node1]:

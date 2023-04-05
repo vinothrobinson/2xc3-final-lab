@@ -29,3 +29,4 @@ class Heuristic:
         for source in G.adj:
             for dest in G.adj:
                 h[(source, dest)] = self.distance(source, dest)
+        return h
