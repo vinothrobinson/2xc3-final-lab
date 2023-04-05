@@ -51,4 +51,22 @@ def csv_graph():
 
         return G
 
-print(csv_graph().adj)
+def station_list():
+    with open('london_connections.csv') as file:
+        reader = csv.DictReader(file)
+        reader = list(reader)
+
+        list_dict = {}
+
+        for row in reader:
+            if row['station1'] not in list_dict.keys():
+                list_dict[row['station1']] = set()
+            list_dict[row['station1']].add(row['line'])
+            if row['station2'] not in list_dict.keys():
+                list_dict[row['station2']] = set()
+            list_dict[row['station2']].add(row['line'])
+
+        return list_dict
+
+#print(csv_graph().adj)
+#print(station_list())
