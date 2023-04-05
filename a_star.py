@@ -5,7 +5,6 @@ import min_heap
 def a_star(G, s, d, h):
     pred = {}  # Predecessor dictionary. Isn't returned, but here for your understanding
     dist = {}  # Distance dictionary
-    # marked = {}
     shortest_path = []
     Q = min_heap.MinHeap([])
     nodes = list(G.adj.keys())
@@ -14,16 +13,12 @@ def a_star(G, s, d, h):
     for node in nodes:
         Q.insert(min_heap.Element(node, float("inf")))
         dist[node] = float("inf")
-        #marked[node] = False
     Q.decrease_key(s, h(s))
 
     while not Q.is_empty():
         current_element = Q.extract_min()
         if current_element.value == d:
-            #shortest_path.append(d)
-            return (pred, shortest_path)
-        #shortest_path.append(current_element.value)
-        #marked[current_element.value] = True
+            break
         current_node = current_element.value
         dist[current_node] = current_element.key - h(current_node)
         for neighbour in G.adj[current_node]:
@@ -31,8 +26,15 @@ def a_star(G, s, d, h):
                 Q.decrease_key(neighbour, dist[current_node] + G.w(current_node, neighbour) + h(neighbour))
                 dist[neighbour] = dist[current_node] + G.w(current_node, neighbour)
                 pred[neighbour] = current_node
-    # print(marked)
-    # print(pred)
+
+    # Create the shortest path
+    backtrack_node = d
+    while backtrack_node != s:
+        shortest_path.append(backtrack_node)
+        backtrack_node = pred[backtrack_node]
+    shortest_path.append(s)
+    shortest_path.reverse()
+
     return (pred, shortest_path)
 
 
