@@ -1,8 +1,8 @@
 import final_project_part1 as f1
-import part1 as f2
+import heuristic
 import matplotlib.pyplot as plot
-import math
 import csv
+import heuristic_graph
 
 def experiment1_gda(n, funcs, approx_funcs, func_names):
     k_values = [1, 2, 3]
@@ -36,11 +36,12 @@ def experiment1_gda(n, funcs, approx_funcs, func_names):
 
 
 def csv_graph():
+    heuristic_generator = heuristic.Heuristic()
     with open('london_connections.csv') as file:
         reader = csv.DictReader(file)
         reader = list(reader)
 
-        G = f1.DirectedWeightedGraph()
+        G = heuristic_graph.HeuristicGraph()
 
         for row in reader:
             if row['station1'] not in G.adj.keys():
@@ -48,6 +49,8 @@ def csv_graph():
             if row['station2'] not in G.adj.keys():
                 G.add_node(row['station2'])
             G.add_edge(row['station1'], row['station2'], row['time'])
+
+        G.set_heuristic(heuristic_generator.get_heuristic_all_pairs(G))
 
         return G
 
