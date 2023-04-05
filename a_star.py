@@ -4,7 +4,7 @@ import min_heap
 def a_star(G, s, d, h):
     pred = {}  # Predecessor dictionary. Isn't returned, but here for your understanding
     dist = {}  # Distance dictionary
-    '''marked = {}'''
+    marked = {}
     shortest_path = []
     Q = min_heap.MinHeap([])
     nodes = list(G.adj.keys())
@@ -13,19 +13,19 @@ def a_star(G, s, d, h):
     for node in nodes:
         Q.insert(min_heap.Element(node, float("inf")))
         dist[node] = float("inf")
-        '''marked[node] = False'''
+        marked[node] = False
     Q.decrease_key(s, h(s))
 
     while not Q.is_empty():
         current_element = Q.extract_min()
         if current_element.value == d:
             shortest_path.append(d)
-            '''print(marked)
+            print(marked)
             print(pred)
-            print(shortest_path)'''
+            print(shortest_path)
             return (pred, shortest_path)
         shortest_path.append(current_element.value)
-        '''marked[current_element.value] = True'''
+        marked[current_element.value] = True
         current_node = current_element.value
         dist[current_node] = current_element.key - h(current_node)
         for neighbour in G.adj[current_node]:
@@ -33,8 +33,8 @@ def a_star(G, s, d, h):
                 Q.decrease_key(neighbour, dist[current_node] + G.w(current_node, neighbour) + h(neighbour))
                 dist[neighbour] = dist[current_node] + G.w(current_node, neighbour)
                 pred[neighbour] = current_node
-    '''print(marked)
-    print(pred)'''
+    print(marked)
+    print(pred)
     return (pred, shortest_path)
 
 def h(node):
