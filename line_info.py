@@ -12,6 +12,9 @@ class LineInfo:
                 self.edge_lines[(row['station2'], row['station1'])] = row['line']
 
     def num_lines(self, path):
+        if len(path) < 2:
+            return 1
+
         lines = set()
 
         for i in range(0, len(path) - 1):
@@ -20,6 +23,9 @@ class LineInfo:
         return len(lines)
 
     def num_transfers(self, path):
+        if len(path) < 2:
+            return 0
+
         transfers = 0
 
         current_line = self.edge_lines[path[0], path[1]]
