@@ -3,6 +3,8 @@ import heuristic
 import matplotlib.pyplot as plot
 import csv
 import heuristic_graph
+import min_heap
+import line_info
 
 def experiment1_gda(n, funcs, approx_funcs, func_names):
     k_values = [1, 2, 3]
@@ -73,3 +75,83 @@ def station_list():
 
 #print(csv_graph().adj)
 #print(station_list())
+
+#num_lines() and num_transfers() that takes in a shortest path and returns a number
+def line_transfers_all_pairs():
+    stations = []
+    G = csv_graph()
+    with open('london_stations.csv') as rfile:
+        with open('karl.csv', 'w', newline = '') as wfile:
+            writer = csv.writer(wfile)
+            writer.writerow(['station1','station2','transfers'])
+            reader = csv.DictReader(rfile)
+            reader = list(reader)
+            for row in reader:
+                stations.append(row['id'])
+            for station1 in stations:
+                for station2 in stations:
+                    LI = line_info.LineInfo()
+                    writer.writerow([station1, station2, LI.num_transfers(dijkstra(G, station1, station2))])
+
+def num_transfers():
+    pass
+def dijkstra(G, s, d):
+    pred = {}  # Predecessor dictionary. Isn't returned, but here for your understanding
+    dist = {}  # Distance dictionary
+    shortest_path = []
+    Q = min_heap.MinHeap([])
+    nodes = list(G.adj.keys())
+
+    # Initialize priority queue/heap and distances
+    for node in nodes:
+        Q.insert(min_heap.Element(node, float("inf")))
+        dist[node] = float("inf")
+    Q.decrease_key(s, 0)
+
+    while not Q.is_empty():
+        current_element = Q.extract_min()
+        if current_element.value == d:
+            break
+        current_node = current_element.value
+        dist[current_node] = current_element.key
+        for neighbour in G.adj[current_node]:
+            if dist[current_node] + G.w(current_node, neighbour) < dist[neighbour]:
+                Q.decrease_key(neighbour, dist[current_node] + G.w(current_node, neighbour))
+                dist[neighbour] = dist[current_node] + G.w(current_node, neighbour)
+                pred[neighbour] = current_node
+
+    # Create the shortest path
+    backtrack_node = d
+    while backtrack_node != s:
+        shortest_path.append(backtrack_node)
+        backtrack_node = pred[backtrack_node]
+    shortest_path.append(s)
+    shortest_path.reverse()
+
+    return shortest_path
+
+'''def dijkstra_all_pairs(stations, min_edge, max_edge):
+    for station1 in stations:
+        for station2 in stations:
+            #matrix[]
+            pass
+            
+    matrix = [[0]* len(stations) for index in range(len(stations))]
+    #matrix[0][0] = 0
+    total_dist = {}
+    G = csv_graph()
+    for station in range(stations):
+        total_dist[station] = f1.dijkstra(G, station)
+    for station in total_dist[station]:
+        k = 0
+        for j in total_dist[station].values():
+            matrix[station][k] = j
+            k += 1
+    print("Dijkstra All Pairs")
+    for m in matrix:
+        print(m)
+    print("\n")
+    return'''
+
+#line_transfers_all_pairs()
+#print(csv_graph().heuristic)
