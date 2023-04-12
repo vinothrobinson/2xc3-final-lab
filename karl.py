@@ -5,6 +5,7 @@ import csv
 import heuristic_graph
 import min_heap
 import line_info
+import tqdm
 
 def experiment1_gda(n, funcs, approx_funcs, func_names):
     k_values = [1, 2, 3]
@@ -81,20 +82,23 @@ def line_transfers_all_pairs():
     stations = []
     G = csv_graph()
     with open('london_stations.csv') as rfile:
-        with open('karl.csv', 'w', newline = '') as wfile:
-            writer = csv.writer(wfile)
-            writer.writerow(['station1','station2','transfers'])
-            reader = csv.DictReader(rfile)
-            reader = list(reader)
-            for row in reader:
-                stations.append(row['id'])
-            for station1 in stations:
-                for station2 in stations:
-                    LI = line_info.LineInfo()
-                    writer.writerow([station1, station2, LI.num_transfers(dijkstra(G, station1, station2))])
+        with open('karl1.csv', 'w', newline = '') as wfile1:
+            with open('karl2.csv', 'w', newline = '') as wfile2:
+                writer1 = csv.writer(wfile1)
+                writer1.writerow(['station1','station2','transfers'])
+                writer2 = csv.writer(wfile2)
+                writer2.writerow(['station1','station2','lines'])
+                reader = csv.DictReader(rfile)
+                reader = list(reader)
+                for row in reader:
+                    stations.append(row['id'])
+                for station1 in stations:
+                    for station2 in stations:
+                        LI = line_info.LineInfo()
+                        shortest_path = dijkstra(G, station1, station2)
+                        writer1.writerow([station1, station2, LI.num_transfers(shortest_path)])
+                        writer2.writerow([station1, station2, LI.num_lines(shortest_path)])
 
-def num_transfers():
-    pass
 def dijkstra(G, s, d):
     pred = {}  # Predecessor dictionary. Isn't returned, but here for your understanding
     dist = {}  # Distance dictionary
@@ -130,28 +134,5 @@ def dijkstra(G, s, d):
 
     return shortest_path
 
-'''def dijkstra_all_pairs(stations, min_edge, max_edge):
-    for station1 in stations:
-        for station2 in stations:
-            #matrix[]
-            pass
-            
-    matrix = [[0]* len(stations) for index in range(len(stations))]
-    #matrix[0][0] = 0
-    total_dist = {}
-    G = csv_graph()
-    for station in range(stations):
-        total_dist[station] = f1.dijkstra(G, station)
-    for station in total_dist[station]:
-        k = 0
-        for j in total_dist[station].values():
-            matrix[station][k] = j
-            k += 1
-    print("Dijkstra All Pairs")
-    for m in matrix:
-        print(m)
-    print("\n")
-    return'''
-
-#line_transfers_all_pairs()
+line_transfers_all_pairs()
 #print(csv_graph().heuristic)
