@@ -5,7 +5,10 @@ import csv
 import heuristic_graph
 import min_heap
 import line_info
-import tqdm
+import experiment2
+import timeit
+import a_star
+import heuristic_graph
 
 def experiment1_gda(n, funcs, approx_funcs, func_names):
     k_values = [1, 2, 3]
@@ -134,5 +137,39 @@ def dijkstra(G, s, d):
 
     return shortest_path
 
-line_transfers_all_pairs()
+def get_transfer_data():
+    transfer_data = {}
+    with open('karl1.csv', 'r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            transfer_data[(row['station1'], row['station2'])] = row['transfers']
+            transfer_data[(row['station2'], row['station1'])] = row['transfers']
+    return transfer_data
+
+def experiment4():
+    dijkstra_times = []
+    astar_times = []
+    G = csv_graph()
+    transfer_data = get_transfer_data()
+    count = 0
+    for comb in transfer_data:
+        if int(transfer_data[comb]) > 1:
+            count += 1
+            print(count)
+            start_time = timeit.default_timer()
+            dijkstra(G, comb[0], comb[1])
+            end_time = timeit.default_timer()
+            dijkstra_times.append(end_time - start_time)
+
+            start_time = timeit.default_timer()
+            G.a_star_heuristic(comb[0], comb[1])
+            end_time = timeit.default_timer()
+            astar_times.append(end_time - start_time)
+    print(dijkstra_times)
+    print(astar_times)
+
+experiment4()
+
+
+
 #print(csv_graph().heuristic)
