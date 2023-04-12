@@ -150,7 +150,7 @@ def experiment4():
     transfer_data = get_transfer_data()
     count = 0
     for comb in transfer_data:
-        if int(transfer_data[comb]) > 1:
+        if int(transfer_data[comb]) > 3:
             count += 1
             if (count%100 == 0):
                 print(count)
@@ -170,6 +170,8 @@ def experiment4():
 
 experiment4()
 
+'''
 
+'''
 
 #print(csv_graph().heuristic)
