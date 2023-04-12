@@ -21,6 +21,10 @@ class Graph(ABC):
     def w(node1: int, node2: int) -> float:
         return
     
+    @abstractmethod
+    def get_num_of_nodes() -> int:
+        return
+    
 class WeightedGraph(Graph):
     def __init__(self):
         self.adj = {}
@@ -40,6 +44,9 @@ class WeightedGraph(Graph):
     def w(self, node1, node2):
         if self.are_connected(node1, node2):
             return self.weights[(node1, node2)]
+        
+    def get_num_of_nodes(self) -> int:
+        return len(self.adj)
 
 class HeuristicGraph(WeightedGraph):
     _heuristic: Dict[int, int]
