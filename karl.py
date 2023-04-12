@@ -136,6 +136,7 @@ def dijkstra(G, s, d):
     shortest_path.reverse()
 
     return shortest_path
+<<<<<<< HEAD
 
 def get_transfer_data():
     transfer_data = {}
@@ -173,3 +174,5 @@ experiment4()
 
 
 #print(csv_graph().heuristic)
+=======
+>>>>>>> fb64a3ec7d56a20f40befe08deb74ee381ccec56

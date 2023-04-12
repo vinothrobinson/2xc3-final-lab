@@ -41,6 +41,5 @@ class HeuristicGraph:
     def set_heuristic(self, heuristic):
         self.heuristic = heuristic
 
-
-def a_star_heuristic(G, s, d):
-    return a_star.a_star(G, s, d, lambda n: G.get_heuristic()[(n, d)])
+    def a_star_heuristic(self, s, d):
+        return a_star.a_star(self, s, d, lambda n: self.get_heuristic()[(n, d)])
