@@ -5,6 +5,8 @@ import karl
 
 
 def experiment5(subway, transfer_data):
+    dijkstra_times = []
+    As_times = []
     for line1 in subway.adj.keys():
         for line2 in subway.adj.keys():
             if transfer_data[(line1, line2)] == 0:
