@@ -132,7 +132,7 @@ def dijkstra(G, s, d):
     shortest_path.append(s)
     shortest_path.reverse()
 
-    return shortest_path
+    return pred, shortest_path
 
 def get_transfer_data():
     transfer_data = {}
@@ -168,7 +168,7 @@ def experiment4():
     print(sum(dijkstra_times) / len(dijkstra_times))
     print(sum(astar_times) / len(astar_times))
 
-experiment4()
+#experiment4()
 
 '''
 
