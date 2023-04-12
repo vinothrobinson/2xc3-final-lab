@@ -2,12 +2,9 @@ import final_project_part1 as f1
 import heuristic
 import matplotlib.pyplot as plot
 import csv
-import heuristic_graph
 import min_heap
 import line_info
-import experiment2
 import timeit
-import a_star
 import heuristic_graph
 
 def experiment1_gda(n, funcs, approx_funcs, func_names):
@@ -155,7 +152,8 @@ def experiment4():
     for comb in transfer_data:
         if int(transfer_data[comb]) > 1:
             count += 1
-            print(count)
+            if (count%100 == 0):
+                print(count)
             start_time = timeit.default_timer()
             dijkstra(G, comb[0], comb[1])
             end_time = timeit.default_timer()
@@ -165,8 +163,10 @@ def experiment4():
             G.a_star_heuristic(comb[0], comb[1])
             end_time = timeit.default_timer()
             astar_times.append(end_time - start_time)
-    print(dijkstra_times)
-    print(astar_times)
+            if count > 1000:
+                break
+    print(sum(dijkstra_times) / len(dijkstra_times))
+    print(sum(astar_times) / len(astar_times))
 
 experiment4()
 
