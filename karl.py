@@ -133,6 +133,3 @@ def dijkstra(G, s, d):
     shortest_path.reverse()
 
     return shortest_path
-
-line_transfers_all_pairs()
-#print(csv_graph().heuristic)
