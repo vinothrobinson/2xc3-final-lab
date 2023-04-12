@@ -1,11 +1,13 @@
 import final_project_part1 as f
 import part1 as p
 import matplotlib.pyplot as plot
+
 """
 import random
 import min_heap
 import matplotlib.pyplot as plot
 """
+
 
 def experiment4_dijkstra(graph_size, min_edge, max_edge, max_k_value):
     total_dist = {}
@@ -15,7 +17,7 @@ def experiment4_dijkstra(graph_size, min_edge, max_edge, max_k_value):
 
     # Calculates the approximate distance based on k value
     for i in range(max_k_value):
-        total_dist[i+1] = p.dijkstra_approx(G, 0, i+1)
+        total_dist[i + 1] = p.dijkstra_approx(G, 0, i + 1)
 
     # Calculates the sum of each distance
     for dicts in total_dist:
@@ -23,7 +25,7 @@ def experiment4_dijkstra(graph_size, min_edge, max_edge, max_k_value):
         total_dist[dicts] = total_sum
 
     # Calculates the accuracy between Dijkstra and the approximations
-    for k in range(1, max_k_value+1):
+    for k in range(1, max_k_value + 1):
         accuracy = (total_dist[0] / total_dist[k]) * 100
         total_dist[k] = accuracy
     total_dist[0] = 0
@@ -36,7 +38,8 @@ def experiment4_dijkstra(graph_size, min_edge, max_edge, max_k_value):
     plot.show()
 
     return total_dist
-    
+
+
 def experiment4_bellman(graph_size, min_edge, max_edge, max_k_value):
     total_dist = {}
     # Use this graph for all of the approximations
@@ -45,7 +48,7 @@ def experiment4_bellman(graph_size, min_edge, max_edge, max_k_value):
 
     # Calculates the approximate distance based on k value
     for i in range(max_k_value):
-        total_dist[i+1] = p.bellman_ford_approx(G, 0, i+1)
+        total_dist[i + 1] = p.bellman_ford_approx(G, 0, i + 1)
 
     # Calculates the sum of each distance
     for dicts in total_dist:
@@ -53,7 +56,7 @@ def experiment4_bellman(graph_size, min_edge, max_edge, max_k_value):
         total_dist[dicts] = total_sum
 
     # Calculates the accuracy between Dijkstra and the approximations
-    for k in range(1, max_k_value+1):
+    for k in range(1, max_k_value + 1):
         accuracy = (total_dist[0] / total_dist[k]) * 100
         total_dist[k] = accuracy
     total_dist[0] = 0
@@ -66,6 +69,7 @@ def experiment4_bellman(graph_size, min_edge, max_edge, max_k_value):
     plot.show()
 
     return total_dist
+
 
 # experiment4_dijkstra(10, 1, 10, 9)
 # experiment4_dijkstra(25, 1, 25, 24)
