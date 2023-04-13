@@ -1,6 +1,7 @@
 import math
 import final_project_part1
 import part1
+import part1
 import timeit
 import matplotlib.pyplot as plot
 
@@ -63,3 +64,34 @@ def experiment1_graph(data, node_num, name, ks=[0.05, 0.1, 0.25, 0.5]):
 #
 # data = experiment1_data(final_project_part1.bellman_ford, part1.bellman_ford_approx, 30, 10)
 # experiment1_graph(data, 30, "Bellman-Ford")
+
+
+def experiment2_data(n, funcs, approx_funcs, func_names): #gda graph
+    k_values = [1, 2, 3]
+    final_list = [[], [], []]
+    x_axis = []
+
+    for i in range(len(funcs)):
+        for edges in range(n, (2 * final_project_part1.triangle(n - 1)) + 1):
+            x_axis.append(edges)
+            G = final_project_part1.create_random_graph(n, edges, 1, 100)
+            shortest_paths = funcs[i](G, 0)
+            shortest_path = sum(shortest_paths.values())
+            for index in range(len(k_values)):
+                approx_paths = approx_funcs[i](G, 0, k_values[index])
+                approx_path = sum(approx_paths.values())
+                final_list[index].append(shortest_path / approx_path * 100)
+
+        for index in range(len(k_values)):
+            plot.plot(x_axis, final_list[index], label="k = " + str(k_values[index]))
+        plot.xlabel("Graph density (measured in number of edges)")
+        plot.ylabel("Accuracy of approximation")
+        plot.title("Ice Spikes Biome: " + func_names[i])
+        plot.legend()
+        plot.show()
+        plot.close()
+
+        final_list = [[], [], []]
+        x_axis = []
+
+experiment2_data(20, [final_project_part1.dijkstra, final_project_part1.bellman_ford], [part1.dijkstra_approx, part1.bellman_ford_approx], ["Dijkstra", "Bellman-Ford"])
