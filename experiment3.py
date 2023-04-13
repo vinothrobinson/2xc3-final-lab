@@ -3,13 +3,13 @@ import random
 import timeit
 
 import a_star
-import karl
+import part3
 import refactor
 
 
 def get_transfer_data():
     transfer_data = {}
-    with open('karl1.csv', 'r') as csv_file:
+    with open('transfer_info.csv', 'r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             transfer_data[(row['station1'], row['station2'])] = row['transfers']
@@ -115,57 +115,6 @@ def experiment8(subway, transfer_data):
 
     return sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)
 
-
-def experiment_neg2():
-    def dict_equal(d1, d2):
-        for key in d1.keys():
-            if key not in d2.keys():
-                return False
-            if d1[key] != d2[key]:
-                return False
-        return True
-
-    subway_graph = karl.csv_graph()
-    d = {
-        ("slower", "different") : 0,
-        ("slower", "same") : 0,
-        ("faster", "different") : 0,
-        ("faster", "same") : 0
-    }
-    for _ in range(1000):
-        n1 = str(random.choice(list(subway_graph.adj.keys())))
-        n2 = str(random.choice(list(subway_graph.adj.keys())))
-
-        start = timeit.default_timer()
-        p1 = karl.dijkstra(subway_graph, n1, n2)[0]
-        end = timeit.default_timer()
-        t1 = end - start
-
-        start = timeit.default_timer()
-        p2 = subway_graph.a_star_heuristic(n1, n2)[0]
-        end = timeit.default_timer()
-        t2 = end - start
-
-        if t2 < t1:
-            if dict_equal(p1, p2):
-                d[("faster", "same")] += 1
-            else:
-                d[("faster", "different")] += 1
-        else:
-            if dict_equal(p1, p2):
-                d[("slower", "same")] += 1
-            else:
-                d[("slower", "different")] += 1
-
-    for key in d.keys():
-        print(f"{key} : {d[key]}")
-
-
-# subway_graph = karl.csv_graph()
-# transfer_data = get_transfer_data()
-# times = experiment6(subway_graph, transfer_data)
-# print(f"Dijkstra: {times[0]}")
-# print(f"A*: {times[1]}")
 
 def experiment_neg3():
 
