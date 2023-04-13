@@ -28,7 +28,7 @@ def experiment5(subway):
 
         for line2 in subway.adj.keys():
             start = timeit.default_timer()
-            karl.dijkstra(subway, line1, line2)
+            part3.dijkstra(subway, line1, line2)
             end = timeit.default_timer()
             dijkstra_times.append(end - start)
 
@@ -53,7 +53,7 @@ def experiment6(subway, transfer_data):
         for line2 in subway.adj.keys():
             if transfer_data[(line1, line2)] == '0':
                 start = timeit.default_timer()
-                karl.dijkstra(subway, line1, line2)
+                part3.dijkstra(subway, line1, line2)
                 end = timeit.default_timer()
                 dijkstra_times.append(end - start)
 
@@ -78,7 +78,7 @@ def experiment7(subway, transfer_data):
         for line2 in subway.adj.keys():
             if transfer_data[(line1, line2)] == '1':
                 start = timeit.default_timer()
-                karl.dijkstra(subway, line1, line2)
+                part3.dijkstra(subway, line1, line2)
                 end = timeit.default_timer()
                 dijkstra_times.append(end - start)
 
@@ -103,7 +103,7 @@ def experiment8(subway, transfer_data):
         for line2 in subway.adj.keys():
             if int(transfer_data[(line1, line2)]) > 1:
                 start = timeit.default_timer()
-                karl.dijkstra(subway, line1, line2)
+                part3.dijkstra(subway, line1, line2)
                 end = timeit.default_timer()
                 dijkstra_times.append(end - start)
 
@@ -118,7 +118,7 @@ def experiment8(subway, transfer_data):
 
 def experiment_neg3():
 
-    subway_graph = karl.csv_graph()
+    subway_graph = part3.csv_graph()
     d = {
         "slower" : ([], []),
         "faster" : ([], []),
