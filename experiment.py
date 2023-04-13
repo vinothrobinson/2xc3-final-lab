@@ -1,12 +1,8 @@
 import math
 import final_project_part1
-import part1
-import part1
 import timeit
 import matplotlib.pyplot as plot
-
-import refactor
-
+from tqdm import tqdm
 
 def experiment1_data(func, func_approx, node_num, trial_num, lower_bound = 1, ks = [0.05, 0.1, 0.25, 0.5]):
     avg_times = [[] for i in range(len(ks) + 1)]
@@ -94,4 +90,39 @@ def experiment2_data(n, funcs, approx_funcs, func_names): #gda graph
         final_list = [[], [], []]
         x_axis = []
 
-#experiment2_data(30, [final_project_part1.dijkstra, final_project_part1.bellman_ford], [part1.dijkstra_approx, part1.bellman_ford_approx], ["Dijkstra", "Bellman-Ford"])
+def experiment_mystery():
+    max_node_num = 40
+    trial_num = 50
+    average_times = []
+
+    for node_num in tqdm(range(1, max_node_num + 1)):
+        times = []
+
+        for _ in range(trial_num):
+            G = final_project_part1.create_random_complete_graph(node_num, 1, 1000)
+
+            start_time = timeit.default_timer()
+            final_project_part1.mystery(G)
+            end_time = timeit.default_timer()
+
+            times.append(end_time - start_time)
+
+        average_times.append(sum(times) / len(times))
+
+    xs = [i for i in range(1, max_node_num + 1)]
+    plot.title("Graph Size vs Runtime for Mystery Algorithm")
+    plot.xlabel("log(Graph Size)")
+    plot.ylabel("log(Runtime)")
+    plot.loglog(xs, average_times)
+    plot.show()
+
+    plot.title("Graph Size vs Runtime for Mystery Algorithm")
+    plot.xlabel("Graph Size")
+    plot.ylabel("Runtime")
+    plot.plot(xs, average_times)
+    plot.show()
+
+    return average_times
+
+# experiment2_data(20, [final_project_part1.dijkstra, final_project_part1.bellman_ford], [part1.dijkstra_approx, part1.bellman_ford_approx], ["Dijkstra", "Bellman-Ford"])
+# experiment_mystery()
