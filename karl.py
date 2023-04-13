@@ -7,7 +7,6 @@ import line_info
 import timeit
 import heuristic_graph
 
-
 def csv_graph():
     heuristic_generator = heuristic.Heuristic()
     with open('london_connections.csv') as file:
@@ -46,8 +45,8 @@ def station_list():
 
 #print(csv_graph().adj)
 #print(station_list())
-
 #num_lines() and num_transfers() that takes in a shortest path and returns a number
+
 def line_transfers_all_pairs():
     stations = []
     G = csv_graph()
@@ -113,7 +112,7 @@ def get_transfer_data():
             transfer_data[(row['station2'], row['station1'])] = row['transfers']
     return transfer_data
 
-def experiment4():
+def experiment8():
     dijkstra_times = []
     astar_times = []
     G = csv_graph()
@@ -122,7 +121,7 @@ def experiment4():
     for comb in transfer_data:
         if int(transfer_data[comb]) > 3:
             count += 1
-            if (count%100 == 0):
+            if (count%1000 == 0):
                 print(count)
             start_time = timeit.default_timer()
             dijkstra(G, comb[0], comb[1])
@@ -133,15 +132,9 @@ def experiment4():
             G.a_star_heuristic(comb[0], comb[1])
             end_time = timeit.default_timer()
             astar_times.append(end_time - start_time)
-            if count > 1000:
-                break
     print(sum(dijkstra_times) / len(dijkstra_times))
     print(sum(astar_times) / len(astar_times))
 
-experiment4()
-
-'''
-
-'''
+experiment8()
 
 #print(csv_graph().heuristic)

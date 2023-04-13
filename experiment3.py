@@ -91,7 +91,7 @@ def experiment7(subway, transfer_data):
     return sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)
 
 
-def experiment7(subway, transfer_data):
+def experiment8(subway, transfer_data):
     dijkstra_times = []
     a_star_times = []
 
