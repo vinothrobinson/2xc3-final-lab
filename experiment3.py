@@ -17,7 +17,7 @@ def get_transfer_data():
     return transfer_data
 
 
-def experiment5(subway, transfer_data):
+def experiment5(subway):
     dijkstra_times = []
     a_star_times = []
 
