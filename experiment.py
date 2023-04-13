@@ -84,9 +84,9 @@ def experiment2_data(n, funcs, approx_funcs, func_names): #gda graph
 
         for index in range(len(k_values)):
             plot.plot(x_axis, final_list[index], label="k = " + str(k_values[index]))
-        plot.xlabel("Graph density (measured in number of edges)")
-        plot.ylabel("Accuracy of approximation")
-        plot.title("Ice Spikes Biome: " + func_names[i])
+        plot.xlabel("Graph Density (measured in number of edges)")
+        plot.ylabel("Accuracy of Approximation")
+        plot.title("Accuracy vs. Density: " + func_names[i])
         plot.legend()
         plot.show()
         plot.close()
@@ -94,4 +94,4 @@ def experiment2_data(n, funcs, approx_funcs, func_names): #gda graph
         final_list = [[], [], []]
         x_axis = []
 
-experiment2_data(20, [final_project_part1.dijkstra, final_project_part1.bellman_ford], [part1.dijkstra_approx, part1.bellman_ford_approx], ["Dijkstra", "Bellman-Ford"])
+#experiment2_data(30, [final_project_part1.dijkstra, final_project_part1.bellman_ford], [part1.dijkstra_approx, part1.bellman_ford_approx], ["Dijkstra", "Bellman-Ford"])
