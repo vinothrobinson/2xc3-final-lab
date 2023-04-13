@@ -5,6 +5,7 @@ import timeit
 import matplotlib.pyplot as plot
 from tqdm import tqdm
 
+# --------------------------------------- Experiment 1 ---------------------------------------------
 def experiment1_data(func, func_approx, node_num, trial_num, lower_bound = 1, ks = [0.05, 0.1, 0.25, 0.5]):
     avg_times = [[] for i in range(len(ks) + 1)]
 
@@ -30,7 +31,6 @@ def experiment1_data(func, func_approx, node_num, trial_num, lower_bound = 1, ks
             avg_times[i].append(times[i] / trial_num)
 
     return avg_times
-
 
 def experiment1_graph(data, node_num, name, ks=[0.05, 0.1, 0.25, 0.5]):
     plot.title(f"Graph Density vs Run Time of Approximations\nfor Various K-Values (|V| = {node_num})")
@@ -62,7 +62,7 @@ def experiment1_graph(data, node_num, name, ks=[0.05, 0.1, 0.25, 0.5]):
 # data = experiment1_data(f.bellman_ford, a.bellman_ford_approx, 30, 10)
 # experiment1_graph(data, 30, "Bellman-Ford")
 
-
+# --------------------------------------- Experiment 2 ---------------------------------------------
 def experiment2_data(n, funcs, approx_funcs, func_names): #gda graph
     k_values = [1, 2, 3]
     final_list = [[], [], []]
