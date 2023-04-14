@@ -112,29 +112,5 @@ def get_transfer_data():
             transfer_data[(row['station2'], row['station1'])] = row['transfers']
     return transfer_data
 
-def experiment8():
-    dijkstra_times = []
-    astar_times = []
-    G = csv_graph()
-    transfer_data = get_transfer_data()
-    count = 0
-    for comb in transfer_data:
-        if int(transfer_data[comb]) > 3:
-            count += 1
-            if (count%1000 == 0):
-                print(count)
-            start_time = timeit.default_timer()
-            dijkstra(G, comb[0], comb[1])
-            end_time = timeit.default_timer()
-            dijkstra_times.append(end_time - start_time)
-
-            start_time = timeit.default_timer()
-            G.a_star_heuristic(comb[0], comb[1])
-            end_time = timeit.default_timer()
-            astar_times.append(end_time - start_time)
-    print(sum(dijkstra_times) / len(dijkstra_times))
-    print(sum(astar_times) / len(astar_times))
-
-experiment8()
 
 #print(csv_graph().heuristic)

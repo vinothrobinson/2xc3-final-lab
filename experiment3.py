@@ -5,6 +5,7 @@ import timeit
 import a_star
 import part3
 import refactor
+import matplotlib.pyplot as plot
 
 
 def get_transfer_data():
@@ -22,10 +23,7 @@ def experiment5(subway):
     a_star_times = []
 
     for i, line1 in enumerate(subway.adj.keys()):
-        if i > 8:
-            break
-        print(f"iteration {i}")
-
+        print(i)
         for line2 in subway.adj.keys():
             start = timeit.default_timer()
             part3.dijkstra(subway, line1, line2)
@@ -38,7 +36,11 @@ def experiment5(subway):
             end = timeit.default_timer()
             a_star_times.append(end - start)
 
-    return sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)
+    plot.plot(dijkstra_times, label="Dijkstra", alpha=0.5, color='red')
+    plot.plot(a_star_times, label="A*", alpha=0.5, color='blue')
+    plot.legend()
+    plot.show()
+    return [sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)]
 
 
 def experiment6(subway, transfer_data):
@@ -46,10 +48,7 @@ def experiment6(subway, transfer_data):
     a_star_times = []
 
     for i, line1 in enumerate(subway.adj.keys()):
-        if i > 8:
-            break
-        print(f"iteration {i}")
-
+        print(i)
         for line2 in subway.adj.keys():
             if transfer_data[(line1, line2)] == '0':
                 start = timeit.default_timer()
@@ -63,7 +62,11 @@ def experiment6(subway, transfer_data):
                 end = timeit.default_timer()
                 a_star_times.append(end - start)
 
-    return sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)
+    plot.plot(dijkstra_times, label="Dijkstra", alpha = 0.5, color = 'red')
+    plot.plot(a_star_times, label="A*", alpha = 0.5, color = 'blue')
+    plot.legend()
+    plot.show()
+    return [sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)]
 
 
 def experiment7(subway, transfer_data):
@@ -71,10 +74,7 @@ def experiment7(subway, transfer_data):
     a_star_times = []
 
     for i, line1 in enumerate(subway.adj.keys()):
-        if i > 8:
-            break
-        print(f"iteration {i}")
-
+        print(i)
         for line2 in subway.adj.keys():
             if transfer_data[(line1, line2)] == '1':
                 start = timeit.default_timer()
@@ -88,7 +88,11 @@ def experiment7(subway, transfer_data):
                 end = timeit.default_timer()
                 a_star_times.append(end - start)
 
-    return sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)
+    plot.plot(dijkstra_times, label="Dijkstra", alpha=0.5, color='red')
+    plot.plot(a_star_times, label="A*", alpha=0.5, color='blue')
+    plot.legend()
+    plot.show()
+    return [sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)]
 
 
 def experiment8(subway, transfer_data):
@@ -96,10 +100,7 @@ def experiment8(subway, transfer_data):
     a_star_times = []
 
     for i, line1 in enumerate(subway.adj.keys()):
-        if i > 8:
-            break
-        print(f"iteration {i}")
-
+        print(i)
         for line2 in subway.adj.keys():
             if int(transfer_data[(line1, line2)]) > 1:
                 start = timeit.default_timer()
@@ -113,7 +114,11 @@ def experiment8(subway, transfer_data):
                 end = timeit.default_timer()
                 a_star_times.append(end - start)
 
-    return sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)
+    plot.plot(dijkstra_times, label="Dijkstra", alpha=0.5, color='red')
+    plot.plot(a_star_times, label="A*", alpha=0.5, color='blue')
+    plot.legend()
+    plot.show()
+    return [sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)]
 
 
 def experiment_neg3():
@@ -159,4 +164,10 @@ def experiment_neg3():
         print(f"\tmax path length: {max(d[key][1])}")
 
 
-experiment_neg3()
+#experiment_neg3()
+
+G = part3.csv_graph()
+transfer_data = get_transfer_data()
+exp = experiment6(G, transfer_data)
+print("Dijkstra's Average Runtime is: " + str(exp[0]))
+print("A*'s Average Runtime is: " + str(exp[1]))
