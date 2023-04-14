@@ -121,14 +121,13 @@ def experiment8(subway, transfer_data):
     return [sum(dijkstra_times) / len(dijkstra_times), sum(a_star_times) / len(a_star_times)]
 
 
-def experiment_neg3():
-
+def experiment9():
     subway_graph = part3.csv_graph()
     d = {
         "slower" : ([], []),
         "faster" : ([], []),
     }
-    for _ in range(10000):
+    for _ in range(100):
         n1 = str(random.choice(list(subway_graph.adj.keys())))
         n2 = str(random.choice(list(subway_graph.adj.keys())))
 
@@ -164,10 +163,10 @@ def experiment_neg3():
         print(f"\tmax path length: {max(d[key][1])}")
 
 
-#experiment_neg3()
+experiment9()
 
-G = part3.csv_graph()
-transfer_data = get_transfer_data()
-exp = experiment6(G, transfer_data)
-print("Dijkstra's Average Runtime is: " + str(exp[0]))
-print("A*'s Average Runtime is: " + str(exp[1]))
+# G = part3.csv_graph()
+# transfer_data = get_transfer_data()
+# exp = experiment6(G, transfer_data)
+# print("Dijkstra's Average Runtime is: " + str(exp[0]))
+# print("A*'s Average Runtime is: " + str(exp[1]))

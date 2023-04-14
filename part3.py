@@ -4,8 +4,8 @@ import matplotlib.pyplot as plot
 import csv
 import min_heap
 import line_info
-import timeit
 import heuristic_graph
+
 
 def csv_graph():
     heuristic_generator = heuristic.Heuristic()
@@ -26,6 +26,7 @@ def csv_graph():
 
         return G
 
+
 def station_list():
     with open('london_connections.csv') as file:
         reader = csv.DictReader(file)
@@ -43,9 +44,11 @@ def station_list():
 
         return list_dict
 
+
 #print(csv_graph().adj)
 #print(station_list())
 #num_lines() and num_transfers() that takes in a shortest path and returns a number
+
 
 def line_transfers_all_pairs():
     stations = []
@@ -67,6 +70,7 @@ def line_transfers_all_pairs():
                         shortest_path = dijkstra(G, station1, station2)
                         writer1.writerow([station1, station2, LI.num_transfers(shortest_path)])
                         writer2.writerow([station1, station2, LI.num_lines(shortest_path)])
+
 
 def dijkstra(G, s, d):
     pred = {}  # Predecessor dictionary. Isn't returned, but here for your understanding
@@ -102,15 +106,6 @@ def dijkstra(G, s, d):
     shortest_path.reverse()
 
     return pred, shortest_path
-
-def get_transfer_data():
-    transfer_data = {}
-    with open('transfer_info.csv', 'r') as csv_file:
-        csv_reader = csv.DictReader(csv_file)
-        for row in csv_reader:
-            transfer_data[(row['station1'], row['station2'])] = row['transfers']
-            transfer_data[(row['station2'], row['station1'])] = row['transfers']
-    return transfer_data
 
 
 #print(csv_graph().heuristic)
