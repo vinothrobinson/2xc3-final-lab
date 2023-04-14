@@ -127,7 +127,7 @@ def experiment9():
         "slower" : ([], []),
         "faster" : ([], []),
     }
-    for _ in range(100):
+    for _ in range(10000):
         n1 = str(random.choice(list(subway_graph.adj.keys())))
         n2 = str(random.choice(list(subway_graph.adj.keys())))
 
@@ -163,7 +163,7 @@ def experiment9():
         print(f"\tmax path length: {max(d[key][1])}")
 
 
-experiment9()
+# experiment9()
 
 # G = part3.csv_graph()
 # transfer_data = get_transfer_data()
